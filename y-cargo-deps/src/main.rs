@@ -38,8 +38,8 @@ impl Display for Dependency {
             f,
             "{}",
             match self {
-                Dependency::Simple(s) => s,
-                Dependency::Detailed(d) => d.version.as_str(),
+                Dependency::Detailed(d) => d.clone().version.unwrap(),
+                Dependency::Simple(d) => d.clone(),
             }
         )
     }
@@ -48,7 +48,7 @@ impl Display for Dependency {
 #[derive(Debug, Clone, PartialEq, Default, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub struct DependencyDetail {
-    pub version: String,
+    pub version: Option<String>,
     pub registry: Option<String>,
     pub registry_index: Option<String>,
     pub path: Option<String>,
