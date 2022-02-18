@@ -37,9 +37,9 @@ impl Display for Dependency {
         write!(
             f,
             "{}",
-            match self {
-                Dependency::Detailed(d) => d.clone().version.unwrap(),
-                Dependency::Simple(d) => d.clone(),
+            match &self {
+                Dependency::Detailed(d) => d.version.as_deref().unwrap(),
+                Dependency::Simple(d) => d,
             }
         )
     }
